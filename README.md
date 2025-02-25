@@ -1,7 +1,8 @@
 # Bio
 Hi, I'm こうちゃん.
 
-I creating some useful web app tools as a hobby.
+I creating some useful web app tools as a hobby.  
+Sometimes Python...
 ## My Skills
 <p align="left">
   <a href="https://skillicons.dev">
