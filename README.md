@@ -16,7 +16,7 @@ I creating some useful web app tools as a hobby.
 Go to <a href="https://koucyan-home.vercel.app">My Home Page</a> to access my tools.
 > [!IMPORTANT]
 > ***Some pages may out of link due to moving sites***  
-> [] Moving to Vercel from Github pages
+> My web sites are being moved Vercel from Github pages
 
 > [!NOTE]
 >**Currently almost Repositories are only available in** ***Japanese***
