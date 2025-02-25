@@ -9,7 +9,7 @@ I creating some useful web app tools as a hobby.
   </a>
 </p>
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=koucyan-iruka&layout=donut](https://github.com/koucyan-iruka/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=koucyan-iruka&layout=donut)](https://github.com/koucyan-iruka/github-readme-stats)
 
 
 # How to use
@@ -20,3 +20,5 @@ Go to <a href="https://koucyan-home.vercel.app">My Home Page</a> to access my to
 
 > [!NOTE]
 >**Currently almost Repositories are only available in** ***Japanese***
+
+If you found any bugs, please report issues.
