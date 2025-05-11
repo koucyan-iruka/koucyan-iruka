@@ -13,10 +13,7 @@ My repos are memo of things I made as a hobby.
 
 
 # How to use
-Go to <a href="https://koucyan-home.vercel.app">My Home Page</a> to access my tools.
-> [!IMPORTANT]
-> ***Some pages may out of link due to moving sites***  
-> My web sites are being moved Vercel from Github pages
+Go to <a href="https://www.koutyan.com">My Home Page</a> to access my sites.
 
 > [!NOTE]
 >**Currently almost Repositories are only available in** ***Japanese***
