@@ -1,0 +1,170 @@
+:root {
+    --text-primary: #1d1d1f;
+    --text-secondary: rgba(60, 60, 67, 0.65);
+    --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.35));
+    --glass-inset: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --shadow: 0 24px 48px -12px rgba(31, 38, 135, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    --key-shadow: 0 8px 20px -6px rgba(31, 38, 135, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f5f5f7;
+        --text-secondary: rgba(235, 235, 245, 0.6);
+        --glass: linear-gradient(135deg, rgba(50, 55, 70, 0.55), rgba(30, 33, 45, 0.4));
+        --glass-inset: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        --key-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Hiragino Sans', sans-serif;
+    color: var(--text-primary);
+    background: #eef1f7;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0b0d14;
+    }
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 24px;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 32px 36px;
+    border-radius: 32px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+#increment-btn,
+#decrement-btn {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    font-size: 40px;
+    font-weight: 400;
+    font-family: inherit;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.92), rgba(64, 156, 255, 0.85));
+    box-shadow: 0 8px 20px -6px rgba(10, 132, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.15s;
+}
+
+#increment-btn:hover,
+#decrement-btn:hover,
+#reset:hover {
+    filter: brightness(1.08);
+}
+
+#increment-btn:active,
+#decrement-btn:active,
+#reset:active {
+    transform: scale(0.93);
+}
+
+#counter-value {
+    min-width: 160px;
+    padding: 18px 24px;
+    border-radius: 22px;
+    font-size: 48px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: var(--text-primary);
+    background: var(--glass-inset);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 2px 8px rgba(31, 38, 135, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#reset {
+    margin-top: 20px;
+    padding: 12px 36px;
+    border-radius: 999px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--key-shadow);
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.15s;
+}
+
+.hint {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px 12px;
+    }
+
+    .counter {
+        gap: 12px;
+        padding: 20px 16px;
+        border-radius: 26px;
+        width: 100%;
+        max-width: 400px;
+        justify-content: center;
+    }
+
+    #increment-btn,
+    #decrement-btn {
+        width: 64px;
+        height: 64px;
+        font-size: 32px;
+        flex-shrink: 0;
+    }
+
+    #counter-value {
+        min-width: 0;
+        flex: 1;
+        padding: 12px 8px;
+        font-size: 36px;
+        border-radius: 18px;
+    }
+
+    #reset {
+        padding: 11px 30px;
+        font-size: 16px;
+    }
+
+    .hint {
+        text-align: center;
+        padding: 0 8px;
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../icns/tkcal.svg">
+    <title>Calclator</title>
+    <label hidden>しゃべる電卓です。多言語対応(ブラウザに依存します) </label>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="calculator">
+        <form name="calculator">
+            <div class="disp">
+            <input type="text" name="display" id="display" disabled class="disp" placeholder="0">
+            </div>
+                <br>
+                <br>
+            <input type="button" class="btn-op" value="√" onclick="sqrtcal()">
+            <input type="button" class="btn-op" value="³√" onclick="cbrtcal()">
+            <input type="button" class="btn-op" value="^" onclick="addToDisplay('**')">
+            <input type="button" class="btn-cl" value="C" onclick="clearDisplay()">
+                <br>
+                <br>
+            <input type="button" class="btn-large" value="7" onclick="addToDisplay('7')">
+            <input type="button" class="btn-large" value="8" onclick="addToDisplay('8')">
+            <input type="button" class="btn-large" value="9" onclick="addToDisplay('9')">
+            <input type="button" class="btn-op" value="÷" onclick="addToDisplay('/')">
+                <br>
+                <br>
+            <input type="button" class="btn-large" value="4" onclick="addToDisplay('4')">
+            <input type="button" class="btn-large" value="5" onclick="addToDisplay('5')">
+            <input type="button" class="btn-large" value="6" onclick="addToDisplay('6')">
+            <input type="button" class="btn-op" value="×" onclick="addToDisplay('*')">
+                <br>
+                <br>
+            <input type="button" class="btn-large" value="1" onclick="addToDisplay('1')">
+            <input type="button" class="btn-large" value="2" onclick="addToDisplay('2')">
+            <input type="button" class="btn-large" value="3" onclick="addToDisplay('3')">
+            <input type="button" class="btn-op" value="-" onclick="addToDisplay('-')">
+                <br>
+                <br>
+            <input type="button" class="btn-large" value="0" onclick="addToDisplay('0')">
+            <input type="button" class="btn-large" value="." onclick="addToDisplay('.')">
+            <input type="button" class="btn-eq" value="=" onclick="calculate()">
+            <input type="button" class="btn-op" value="+" onclick="addToDisplay('+')">
+        </form>
+    </div>
+        <br>
+        <br>
+        <br>
+    <div class="lang-select">
+        <label>音声 / (言語)</label>
+        <select id="voice-names" class="browser-default"></select>
+    </div>
+    <br>
+    <div class="speech-rate">
+        <label>速度</label><input id="rate" type="range" min="0.5" max="2" step="0.1" value="1" class="range">
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="img/svg" href="../icns/cnt.svg">
+</head>
+<body>
+    <div class="container">
+        <div class="counter">
+            <button id="decrement-btn">−</button>
+            <div id="counter-value">0</div>
+            <button id="increment-btn">+</button>
+        </div>
+        <button id="reset">Reset</button>
+        <p class="hint">Space / PageDown: +1　Backspace / PageUp: −1</p>
+    </div>
+    <script src="counter.js"></script>
+    <script>
+        // Add event listener for space key press
+        document.addEventListener('keydown', function (event) {
+            if (event.key === ' ') { // Check if space key is pressed
+                counter++; // Increment the counter
+                counterValue.textContent = counter; // Update the display
+            }
+            if (event.key === 'Backspace'){
+                counter--;
+                counterValue.textContent = counter;
+            }
+            if (event.key === 'PageDown') { // Check if space key is pressed
+                counter++; // Increment the counter
+                counterValue.textContent = counter; // Update the display
+            }
+            if (event.key === 'PageUp'){
+                counter--;
+                counterValue.textContent = counter;
+            }
+        });
+    </script>
+</body>
+</html>

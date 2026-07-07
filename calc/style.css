@@ -1,0 +1,157 @@
+:root {
+    --text-primary: #1d1d1f;
+    --text-secondary: rgba(60, 60, 67, 0.65);
+    --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.35));
+    --glass-inset: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --key-bg: rgba(255, 255, 255, 0.55);
+    --key-op-bg: rgba(255, 255, 255, 0.3);
+    --accent: #0a84ff;
+    --radius: 32px;
+    --shadow: 0 24px 48px -12px rgba(31, 38, 135, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    --key-shadow: 0 4px 12px -4px rgba(31, 38, 135, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f5f5f7;
+        --text-secondary: rgba(235, 235, 245, 0.6);
+        --glass: linear-gradient(135deg, rgba(50, 55, 70, 0.55), rgba(30, 33, 45, 0.4));
+        --glass-inset: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --key-bg: rgba(255, 255, 255, 0.14);
+        --key-op-bg: rgba(255, 255, 255, 0.07);
+        --accent: #409cff;
+        --shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        --key-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Hiragino Sans', sans-serif;
+    color: var(--text-primary);
+    background: #eef1f7;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0b0d14;
+    }
+}
+
+.calculator {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    width: 360px;
+    max-width: 100%;
+}
+
+#display {
+    width: 100%;
+    font-size: 34px;
+    font-weight: 500;
+    text-align: right;
+    padding: 16px 18px;
+    margin-bottom: 18px;
+    border: 1px solid var(--glass-border);
+    border-radius: 18px;
+    background: var(--glass-inset);
+    color: var(--text-primary);
+    outline: none;
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.keys input {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: inherit;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-primary);
+    background: var(--key-bg);
+    box-shadow: var(--key-shadow);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: transform 0.1s, filter 0.15s;
+}
+
+.keys input:hover {
+    filter: brightness(1.06);
+}
+
+.keys input:active {
+    transform: scale(0.93);
+}
+
+.keys input.op {
+    background: var(--key-op-bg);
+    color: var(--accent);
+}
+
+.keys input.eq {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.92), rgba(64, 156, 255, 0.85));
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 20px -6px rgba(10, 132, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.keys input.cl {
+    background: linear-gradient(135deg, rgba(255, 69, 58, 0.85), rgba(255, 105, 97, 0.8));
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 20px -6px rgba(255, 69, 58, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 420px) {
+    body {
+        padding: 12px;
+    }
+
+    .calculator {
+        padding: 16px;
+        border-radius: 26px;
+        width: 100%;
+    }
+
+    #display {
+        font-size: 28px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        margin-bottom: 14px;
+    }
+
+    .keys {
+        gap: 8px;
+    }
+
+    .keys input {
+        font-size: 20px;
+    }
+}

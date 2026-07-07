@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg" href="../icns/nengo.svg">
+    <link rel="stylesheet" href="style.css">
+    <title>年号変換機</title>
+</head>
+<body>
+    <div class="w2j">
+        <p>西暦 → 和暦</p>
+        <div class="input-row">
+            <label for="yearInput">西暦</label>
+            <input type="number" id="yearInput" min="1868" max="2100" placeholder="xxxx">
+            <label>年</label>
+            <button onclick="w2jconvert()">変換</button>
+        </div>
+        <label id="result">西暦を入力...</label>
+        <script>
+            const inputWS = document.getElementById('yearInput');
+            inputWS.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') { w2jconvert(); }
+            });
+        </script>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="j2w">
+        <p>和暦 → 西暦</p>
+        <div class="input-row">
+            <label for="jpyearIn">和暦</label>
+            <select id="eraInput">
+                <option value="R">令和</option>
+                <option value="H">平成</option>
+                <option value="S">昭和</option>
+                <option value="T">大正</option>
+                <option value="M">明治</option>
+            </select>
+            <input type="number" id="jpyearIn" min="1" max="100" placeholder="xx">
+            <label>年</label>
+            <button onclick="j2wconvert()">変換</button>
+        </div>
+        <label id="wresult">和暦を入力...</label>
+        <script>
+            const inputJP = document.getElementById('jpyearIn');
+            inputJP.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') { j2wconvert(); }
+            });
+        </script>
+    </div>
+
+    <script src="script.js"></script>
+</body>

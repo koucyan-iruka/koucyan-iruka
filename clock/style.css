@@ -1,0 +1,163 @@
+:root {
+    --text-primary: #1d1d1f;
+    --text-secondary: rgba(60, 60, 67, 0.65);
+    --glass: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.35));
+    --glass-inset: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --hand: #1d1d1f;
+    --sec: #ff453a;
+    --tick: rgba(60, 60, 67, 0.35);
+    --shadow: 0 24px 48px -12px rgba(31, 38, 135, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f5f5f7;
+        --text-secondary: rgba(235, 235, 245, 0.6);
+        --glass: linear-gradient(135deg, rgba(50, 55, 70, 0.55), rgba(30, 33, 45, 0.4));
+        --glass-inset: rgba(255, 255, 255, 0.06);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --hand: #f5f5f7;
+        --sec: #ff6961;
+        --tick: rgba(235, 235, 245, 0.35);
+        --shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Hiragino Sans', sans-serif;
+    color: var(--text-primary);
+    background: #eef1f7;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #0b0d14;
+    }
+}
+
+.clock-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 36px;
+    border-radius: 40px;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.c-clock {
+    position: relative;
+    width: min(400px, 78vw);
+    height: min(400px, 78vw);
+    border-radius: 50%;
+    background: var(--glass-inset);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 2px 12px rgba(31, 38, 135, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.c-clock__ticks {
+    position: absolute;
+    inset: 0;
+}
+
+.c-clock__ticks span {
+    position: absolute;
+    top: 3%;
+    left: calc(50% - 2.5px);
+    width: 5px;
+    height: 6.5%;
+    border-radius: 2px;
+    background: var(--text-secondary);
+    transform-origin: 50% calc(50% * 100 / 6.5 * 0.94);
+}
+
+/* 針の代わりに数字が回る：透明なアームの先端に数字を置く */
+.c-clock__hour,
+.c-clock__min,
+.c-clock__sec {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    width: 0;
+    transform-origin: 50% 100%;
+}
+
+.c-clock__hour {
+    height: 24%;
+}
+
+.c-clock__min {
+    height: 34%;
+}
+
+.c-clock__sec {
+    height: 43%;
+}
+
+.c-clock__num {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.c-clock__hour .c-clock__num {
+    font-size: clamp(28px, 11vw, 56px);
+    font-weight: 800;
+    color: var(--hand);
+    text-shadow: 0 2px 8px rgba(31, 38, 135, 0.25);
+}
+
+.c-clock__min .c-clock__num {
+    font-size: clamp(20px, 8vw, 40px);
+    font-weight: 700;
+    color: var(--hand);
+    opacity: 0.85;
+    text-shadow: 0 2px 8px rgba(31, 38, 135, 0.25);
+}
+
+.c-clock__sec .c-clock__num {
+    font-size: clamp(14px, 5vw, 24px);
+    font-weight: 600;
+    color: var(--sec);
+    text-shadow: 0 0 8px rgba(255, 69, 58, 0.5);
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 16px 12px;
+    }
+
+    .clock-card {
+        padding: 20px;
+        border-radius: 30px;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .c-clock {
+        width: min(400px, 100%);
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+}

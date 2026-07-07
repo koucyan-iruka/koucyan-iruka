@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>n進数変換機</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/svg" href="../icns/nbc.svg">
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript">
+            function convert() {
+                const base = insys.value === "Other" ? parseInt(cstsys.value) : parseInt(insys.value);
+                cstsys.style.display = insys.value === "Other" ? "inline-block" : "none";
+                result.value = parseInt(inputvalue.value, base);
+            }
+            function convert2() {
+                const base = osys.value === "Other" ? parseInt(cstosys.value) : parseInt(osys.value);
+                cstosys.style.display = osys.value === "Other" ? "inline-block" : "none";
+                outvalue.value = Number(result.value).toString(base);
+            }
+        </script>
+    </head>
+    <body>
+        <div class="card">
+            <h5>n進数 ↔ 10進数</h5>
+
+            <div class="section">
+                <span class="section-label">入力</span>
+                <select id="insys" onchange="convert()">
+                    <option>n</option>
+                    <option>2</option>
+                    <option>8</option>
+                    <option>16</option>
+                    <option>Other</option>
+                </select>
+                <span style="font-size:14px;color:var(--text-secondary)">進数</span>
+                <input type="text" id="cstsys" placeholder="2–36" style="display:none">
+                <input type="text" id="inputvalue" placeholder="数値" oninput="convert()">
+            </div>
+
+            <div class="arrow-btn">
+                <button onclick="convert()">↓ 変換</button>
+            </div>
+
+            <div class="mid-section">
+                <span class="section-label">10進数</span>
+                <input type="number" id="result" placeholder="結果">
+            </div>
+
+            <div class="arrow-btn">
+                <button onclick="convert2()">↓ 変換</button>
+            </div>
+
+            <div class="section">
+                <span class="section-label">出力</span>
+                <select id="osys" onchange="convert2()">
+                    <option>n</option>
+                    <option>2</option>
+                    <option>8</option>
+                    <option>16</option>
+                    <option>Other</option>
+                </select>
+                <span style="font-size:14px;color:var(--text-secondary)">進数</span>
+                <input type="text" id="cstosys" placeholder="2–36" style="display:none">
+                <input type="text" id="outvalue" placeholder="結果" disabled>
+            </div>
+        </div>
+    </body>
+</html>

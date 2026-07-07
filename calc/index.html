@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="icon" href="../icns/cal.svg">
+  <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+    <script>
+      function addToDisplay(value) {
+        document.calculator.display.value += value;
+      }
+
+      function clearDisplay() {
+        document.calculator.display.value = '';
+      }
+
+      function calculate() {
+        try {
+          document.calculator.display.value = eval(document.calculator.display.value);
+        } catch (error) {
+          document.calculator.display.value = 'Error';
+        }
+      }
+      function sqrtcal() {
+        display.value = Math.sqrt(display.value);
+      }
+      function cbrtcal() {
+        display.value = Math.cbrt(display.value);
+      }
+    </script>
+
+   <div class="calculator">
+    <form name="calculator">
+      <input type="text" name="display" id="display" placeholder="0">
+      <div class="keys">
+        <input type="button" class="op" value="√" onclick="sqrtcal()">
+        <input type="button" class="op" value="³√" onclick="cbrtcal()">
+        <input type="button" class="op" value="^" onclick="addToDisplay('**')">
+        <input type="button" class="cl" value="C" onclick="clearDisplay()">
+
+        <input type="button" value="7" onclick="addToDisplay('7')">
+        <input type="button" value="8" onclick="addToDisplay('8')">
+        <input type="button" value="9" onclick="addToDisplay('9')">
+        <input type="button" class="op" value="÷" onclick="addToDisplay('/')">
+
+        <input type="button" value="4" onclick="addToDisplay('4')">
+        <input type="button" value="5" onclick="addToDisplay('5')">
+        <input type="button" value="6" onclick="addToDisplay('6')">
+        <input type="button" class="op" value="×" onclick="addToDisplay('*')">
+
+        <input type="button" value="1" onclick="addToDisplay('1')">
+        <input type="button" value="2" onclick="addToDisplay('2')">
+        <input type="button" value="3" onclick="addToDisplay('3')">
+        <input type="button" class="op" value="−" onclick="addToDisplay('-')">
+
+        <input type="button" value="0" onclick="addToDisplay('0')">
+        <input type="button" value="." onclick="addToDisplay('.')">
+        <input type="button" class="eq" value="=" onclick="calculate()">
+        <input type="button" class="op" value="+" onclick="addToDisplay('+')">
+      </div>
+    </form>
+   </div>
+    <!-- merrychristmas December,25,2023 2:10:29P.M -->
+ </body>
+</html>

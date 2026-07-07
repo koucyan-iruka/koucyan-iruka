@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー 1" xmlns="http://www.w3.org/2000/svg" width="32.21" height="47.18" viewBox="0 0 32.21 47.18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #231815;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x=".5" y=".5" width="31.21" height="46.18" rx="6.75" ry="6.75"/>
+  <rect class="cls-1" x="3.57" y="4.17" width="25.08" height="7.76" rx="1.9" ry="1.9"/>
+  <rect class="cls-1" x="7.03" y="16.38" width="3.94" height="3.94" rx="1.49" ry="1.49"/>
+  <path class="cls-1" d="M15.65,16.38h.91c.83,0,1.51.68,1.51,1.51v.91c0,.84-.68,1.52-1.52,1.52h-.9c-.84,0-1.52-.68-1.52-1.52v-.9c0-.84.68-1.52,1.52-1.52Z"/>
+  <rect class="cls-1" x="21.25" y="16.38" width="3.94" height="3.94" rx="1.48" ry="1.48"/>
+  <rect class="cls-1" x="7.03" y="23.44" width="3.94" height="3.94" rx="1.55" ry="1.55"/>
+  <rect class="cls-1" x="14.14" y="23.44" width="3.94" height="3.94" rx="1.51" ry="1.51"/>
+  <rect class="cls-1" x="21.25" y="23.44" width="3.94" height="3.94" rx="1.5" ry="1.5"/>
+  <rect class="cls-1" x="7.03" y="30.7" width="3.94" height="3.94" rx="1.48" ry="1.48"/>
+  <rect class="cls-1" x="14.14" y="30.7" width="3.94" height="3.94" rx="1.51" ry="1.51"/>
+  <rect class="cls-1" x="21.25" y="30.7" width="3.94" height="3.94" rx="1.5" ry="1.5"/>
+  <rect class="cls-1" x="7.03" y="37.49" width="11.23" height="3.94" rx="1" ry="1"/>
+  <rect class="cls-1" x="21.25" y="37.49" width="3.94" height="3.94" rx="1.5" ry="1.5"/>
+</svg>

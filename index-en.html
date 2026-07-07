@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script>
+            function adjustStyleSheet() {
+                if (window.innerWidth <= 450) {
+                    document.querySelector('link[href="style.css"]').setAttribute('href', 'style-phone.css');
+                }else if (window.innerWidth >= 450 && window.innerWidth <= 1270){
+                    document.querySelector('link[href="style.css"]').setAttribute('href', 'style-tab.css');
+                }
+            }
+            window.addEventListener('resize', adjustStyleSheet);
+            window.addEventListener('DOMContentLoaded', adjustStyleSheet);
+        </script>
+        <link rel="icon" type="image/svg" href="icns/fav.svg">
+        <title>Koucyan HP</title>
+    </head>
+    <body>
+        <p>Koucyan's WebSite</p>
+        <br>
+        <br>
+        <div class="container">
+            <a href="/calc/index.html"><button style="background-color: #ffcaca"><img src="icns/cal.svg">&nbsp;Calc</button></a>
+            <a href="/talkingcalc/index.html"><button style="background-color: beige;"><img src="icns/tkcal.svg">&nbsp;Speaking Calc</button></a>
+            <a href="/sphere/index-en.html"><button style="background-color: #fff090"><img src="icns/pi.svg">&nbsp;Sphere Calc</button></a>
+            <a href="/baseconv/index.html"><button style="background-color: #b9ffb9"><img src="icns/nbc.svg">&nbsp;n Base Conv</button></a>
+            <a href="/clock/index.html"><button style="background-color: #b6ffe7"><img src="icns/clc.svg">&nbsp;Clock</button></a>
+            <a href="/nengou/index.html"><button style="background-color: rgb(203, 255, 252);"><img src="icns/nengo.svg">&nbsp;CalendarConv</button></a>
+            <a href=""><button disabled style="background-color: #cde3ff"><img src="icns/himekuri.svg">&nbsp;Date Calendar</button></a>
+            <a href="/counter/index.html" style="background-color: #e2cdff"><img src="icns/cnt.svg">&nbsp;Counter</button></a>
+            <a href="/capital/index.html"><button style="background-color: #ffbce6"><img src="icns/capital.svg">&nbsp;World Capital Quiz</button></a>
+            <br>
+            <a href="index.html">日本語</a>
+        </div>
+    </body>
+</html>
