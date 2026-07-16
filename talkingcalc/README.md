@@ -7,6 +7,7 @@ Based on my <a href="https://github.com/koucyan-iruka/basic-calc">Basic Caluclat
 - Adjustable speech rate
 - Mute toggle
 - Four arithmetic operations ( + - × ÷ )
+- Parentheses / Percent
 - Square root
 - Cube root
 - Exponentiation

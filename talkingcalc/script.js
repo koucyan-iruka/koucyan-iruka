@@ -100,7 +100,7 @@ function tokenize(src) {
             tokens.push({ type: "num", value: parseFloat(num) });
             continue;
         }
-        if ("+-×÷^".includes(ch)) { tokens.push({ type: ch }); i++; continue; }
+        if ("+-×÷^()".includes(ch)) { tokens.push({ type: ch }); i++; continue; }
         throw new Error("Invalid character");
     }
     return tokens;
@@ -155,6 +155,12 @@ function evaluateExpression(src) {
         const token = next();
         if (!token) throw new Error("Unexpected end of expression");
         if (token.type === "num") return token.value;
+        if (token.type === "(") {
+            const value = parseExpr();
+            const close = next();
+            if (!close || close.type !== ")") throw new Error("Missing closing parenthesis");
+            return value;
+        }
         throw new Error("Unexpected token");
     }
 
@@ -322,6 +328,7 @@ const actions = {
     equals: equals,
     sqrt: () => applyUnary(Math.sqrt, "√"),
     cbrt: () => applyUnary(Math.cbrt, "³√"),
+    percent: () => applyUnary(v => v / 100, "%"),
 };
 
 document.querySelector(".keys").addEventListener("click", (event) => {
@@ -339,6 +346,8 @@ document.addEventListener("keydown", (event) => {
     else if (key === "*") { insert("×"); }
     else if (key === "/") { event.preventDefault(); insert("÷"); }
     else if (key === "^") { insert("^"); }
+    else if (key === "(" || key === ")") { insert(key); }
+    else if (key === "%") { actions.percent(); }
     else if (key === "Enter" || key === "=") { event.preventDefault(); equals(); }
     else if (key === "Backspace") { backspace(); }
     else if (key === "Escape" || key === "Delete") { clearAll(); }
@@ -508,6 +517,66 @@ const operationName = {
         "el": "κυβική ρίζα",
         "he": "שורש שלישי",
         "th": "รากที่สาม"
+    },
+    "(": {
+        "en": "open parenthesis",
+        "de": "Klammer auf",
+        "es": "abrir paréntesis",
+        "fr": "parenthèse ouvrante",
+        "hi": "कोष्ठक खोलें",
+        "id": "kurung buka",
+        "it": "parentesi aperta",
+        "ja": "かっこ",
+        "ko": "괄호 열기",
+        "nl": "haakje openen",
+        "pl": "nawias otwierający",
+        "pt": "abre parênteses",
+        "ru": "открыть скобку",
+        "zh": "左括号",
+        "ar": "قوس مفتوح",
+        "el": "άνοιγμα παρένθεσης",
+        "he": "סוגריים פתוחים",
+        "th": "วงเล็บเปิด"
+    },
+    ")": {
+        "en": "close parenthesis",
+        "de": "Klammer zu",
+        "es": "cerrar paréntesis",
+        "fr": "parenthèse fermante",
+        "hi": "कोष्ठक बंद करें",
+        "id": "kurung tutup",
+        "it": "parentesi chiusa",
+        "ja": "かっことじ",
+        "ko": "괄호 닫기",
+        "nl": "haakje sluiten",
+        "pl": "nawias zamykający",
+        "pt": "fecha parênteses",
+        "ru": "закрыть скобку",
+        "zh": "右括号",
+        "ar": "قوس مغلق",
+        "el": "κλείσιμο παρένθεσης",
+        "he": "סוגריים סגורים",
+        "th": "วงเล็บปิด"
+    },
+    "%": {
+        "en": "percent",
+        "de": "Prozent",
+        "es": "por ciento",
+        "fr": "pour cent",
+        "hi": "प्रतिशत",
+        "id": "persen",
+        "it": "per cento",
+        "ja": "パーセント",
+        "ko": "퍼센트",
+        "nl": "procent",
+        "pl": "procent",
+        "pt": "por cento",
+        "ru": "процент",
+        "zh": "百分之",
+        "ar": "بالمئة",
+        "el": "τοις εκατό",
+        "he": "אחוז",
+        "th": "เปอร์เซ็นต์"
     },
     "C": {
         "en": "clear",

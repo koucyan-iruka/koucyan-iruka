@@ -6,17 +6,17 @@
     --gold-strong: #86691f;
     --hairline: rgba(156, 124, 44, 0.4);
     --hairline-soft: rgba(156, 124, 44, 0.22);
-    --panel: linear-gradient(160deg, rgba(255, 253, 246, 0.92), rgba(248, 242, 228, 0.75));
+    --panel: linear-gradient(160deg, rgba(255, 253, 246, 0.9), rgba(250, 245, 233, 0.84));
     --screen-bg: rgba(255, 254, 249, 0.75);
-    --key-bg: linear-gradient(180deg, rgba(255, 254, 250, 0.95), rgba(244, 237, 220, 0.9));
+    --key-bg: linear-gradient(180deg, rgba(255, 254, 250, 0.94), rgba(249, 244, 232, 0.92));
     --key-op-bg: rgba(255, 253, 246, 0.4);
     --clear: #a04a40;
     --radius: 34px;
     --shadow: 0 30px 60px -20px rgba(90, 70, 30, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     --key-shadow: 0 3px 10px -3px rgba(90, 70, 30, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    --eq-bg: linear-gradient(160deg, #ecd489, #cda63d 55%, #a8842c);
+    --eq-bg: linear-gradient(160deg, #dcc57e, #c9a94e);
     --eq-text: #241c08;
-    --eq-shadow: 0 10px 24px -8px rgba(168, 132, 44, 0.55), inset 0 1px 0 rgba(255, 245, 210, 0.8);
+    --eq-shadow: 0 6px 16px -6px rgba(168, 132, 44, 0.4), inset 0 1px 0 rgba(255, 245, 210, 0.5);
     --display-font: 'Didot', 'Bodoni MT', 'Playfair Display', 'Hiragino Mincho ProN', 'Yu Mincho', Georgia, serif;
     --blob-1: rgba(205, 166, 61, 0.2);
     --blob-2: rgba(160, 74, 64, 0.1);
@@ -32,16 +32,16 @@
         --gold-strong: #e9cf7a;
         --hairline: rgba(212, 175, 55, 0.42);
         --hairline-soft: rgba(212, 175, 55, 0.2);
-        --panel: linear-gradient(160deg, rgba(26, 22, 16, 0.85), rgba(10, 9, 8, 0.92));
+        --panel: linear-gradient(160deg, rgba(22, 19, 14, 0.88), rgba(12, 11, 9, 0.92));
         --screen-bg: rgba(0, 0, 0, 0.5);
-        --key-bg: linear-gradient(180deg, rgba(38, 33, 24, 0.85), rgba(18, 16, 12, 0.9));
+        --key-bg: linear-gradient(180deg, rgba(33, 29, 21, 0.88), rgba(24, 21, 16, 0.9));
         --key-op-bg: rgba(212, 175, 55, 0.06);
         --clear: #c96f60;
         --shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(212, 175, 55, 0.22);
         --key-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(212, 175, 55, 0.16);
-        --eq-bg: linear-gradient(160deg, #f2dd96, #cda63d 55%, #8f6f22);
+        --eq-bg: linear-gradient(160deg, #dcc274, #b3933c);
         --eq-text: #1c1504;
-        --eq-shadow: 0 10px 26px -8px rgba(212, 175, 55, 0.35), inset 0 1px 0 rgba(255, 240, 190, 0.7);
+        --eq-shadow: 0 6px 16px -6px rgba(212, 175, 55, 0.28), inset 0 1px 0 rgba(255, 240, 190, 0.45);
         --blob-1: rgba(212, 175, 55, 0.1);
         --blob-2: rgba(120, 70, 40, 0.08);
         --blob-3: rgba(60, 50, 30, 0.12);
@@ -223,7 +223,7 @@ body {
 .key.eq {
     background: var(--eq-bg);
     color: var(--eq-text);
-    border-color: rgba(255, 240, 190, 0.55);
+    border-color: rgba(255, 240, 190, 0.4);
     box-shadow: var(--eq-shadow);
     font-weight: 600;
 }
