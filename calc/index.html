@@ -2,67 +2,58 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#f4efe4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#060507" media="(prefers-color-scheme: dark)">
   <title>Calculator</title>
   <link rel="icon" href="../icns/cal.svg">
   <link rel="stylesheet" href="style.css">
  </head>
  <body>
-    <script>
-      function addToDisplay(value) {
-        document.calculator.display.value += value;
-      }
+  <div class="bg" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
-      function clearDisplay() {
-        document.calculator.display.value = '';
-      }
+  <main class="calculator" aria-label="Calculator">
+    <div class="screen">
+      <div class="expression" id="expression" aria-hidden="true">&nbsp;</div>
+      <output class="display" id="display" aria-live="polite">0</output>
+    </div>
 
-      function calculate() {
-        try {
-          document.calculator.display.value = eval(document.calculator.display.value);
-        } catch (error) {
-          document.calculator.display.value = 'Error';
-        }
-      }
-      function sqrtcal() {
-        display.value = Math.sqrt(display.value);
-      }
-      function cbrtcal() {
-        display.value = Math.cbrt(display.value);
-      }
-    </script>
+    <div class="keys">
+      <button type="button" class="key op"  data-insert="(">(</button>
+      <button type="button" class="key op"  data-insert=")">)</button>
+      <button type="button" class="key op"  data-action="backspace" aria-label="Backspace">⌫</button>
+      <button type="button" class="key cl"  data-action="clear">C</button>
 
-   <div class="calculator">
-    <form name="calculator">
-      <input type="text" name="display" id="display" placeholder="0">
-      <div class="keys">
-        <input type="button" class="op" value="√" onclick="sqrtcal()">
-        <input type="button" class="op" value="³√" onclick="cbrtcal()">
-        <input type="button" class="op" value="^" onclick="addToDisplay('**')">
-        <input type="button" class="cl" value="C" onclick="clearDisplay()">
+      <button type="button" class="key op"  data-action="sqrt">√</button>
+      <button type="button" class="key op"  data-insert="^">xʸ</button>
+      <button type="button" class="key op"  data-action="percent">%</button>
+      <button type="button" class="key op"  data-insert="÷">÷</button>
 
-        <input type="button" value="7" onclick="addToDisplay('7')">
-        <input type="button" value="8" onclick="addToDisplay('8')">
-        <input type="button" value="9" onclick="addToDisplay('9')">
-        <input type="button" class="op" value="÷" onclick="addToDisplay('/')">
+      <button type="button" class="key num" data-insert="7">7</button>
+      <button type="button" class="key num" data-insert="8">8</button>
+      <button type="button" class="key num" data-insert="9">9</button>
+      <button type="button" class="key op"  data-insert="×">×</button>
 
-        <input type="button" value="4" onclick="addToDisplay('4')">
-        <input type="button" value="5" onclick="addToDisplay('5')">
-        <input type="button" value="6" onclick="addToDisplay('6')">
-        <input type="button" class="op" value="×" onclick="addToDisplay('*')">
+      <button type="button" class="key num" data-insert="4">4</button>
+      <button type="button" class="key num" data-insert="5">5</button>
+      <button type="button" class="key num" data-insert="6">6</button>
+      <button type="button" class="key op"  data-insert="-">−</button>
 
-        <input type="button" value="1" onclick="addToDisplay('1')">
-        <input type="button" value="2" onclick="addToDisplay('2')">
-        <input type="button" value="3" onclick="addToDisplay('3')">
-        <input type="button" class="op" value="−" onclick="addToDisplay('-')">
+      <button type="button" class="key num" data-insert="1">1</button>
+      <button type="button" class="key num" data-insert="2">2</button>
+      <button type="button" class="key num" data-insert="3">3</button>
+      <button type="button" class="key op"  data-insert="+">+</button>
 
-        <input type="button" value="0" onclick="addToDisplay('0')">
-        <input type="button" value="." onclick="addToDisplay('.')">
-        <input type="button" class="eq" value="=" onclick="calculate()">
-        <input type="button" class="op" value="+" onclick="addToDisplay('+')">
-      </div>
-    </form>
-   </div>
-    <!-- merrychristmas December,25,2023 2:10:29P.M -->
+      <button type="button" class="key num zero" data-insert="0">0</button>
+      <button type="button" class="key num" data-insert=".">.</button>
+      <button type="button" class="key eq"  data-action="equals">=</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
  </body>
 </html>
