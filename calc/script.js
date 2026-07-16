@@ -95,16 +95,68 @@ function formatResult(n) {
     return String(parseFloat(n.toPrecision(12)));
 }
 
+// ---------- Natural math notation for display ----------
+
+function groupDigits(numStr) {
+    const [int, dec] = numStr.split(".");
+    const grouped = int.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return dec !== undefined ? grouped + "." + dec : grouped;
+}
+
+// Render an internal expression ("2^10×-3+1000") as natural notation
+// ("2¹⁰ × −3 + 1,000") using thin spacing, real minus signs, superscript
+// exponents and digit grouping. Input only ever contains calculator
+// characters, so building HTML here is safe.
+function formatExpression(expr) {
+    let html = "";
+    let i = 0;
+    let prev = null; // "num" | "op" | "open" | null
+    while (i < expr.length) {
+        const ch = expr[i];
+        if (/[0-9.]/.test(ch)) {
+            let num = "";
+            while (i < expr.length && /[0-9.]/.test(expr[i])) num += expr[i++];
+            html += groupDigits(num);
+            prev = "num";
+            continue;
+        }
+        if (ch === "^") {
+            i++;
+            let exp = "";
+            if (expr[i] === "-" || expr[i] === "+") exp += expr[i++];
+            while (i < expr.length && /[0-9.]/.test(expr[i])) exp += expr[i++];
+            // Nothing typed after "^" yet: keep the caret visible
+            html += exp === "" ? "^" : "<sup>" + exp.replace("-", "−") + "</sup>";
+            prev = "num";
+            continue;
+        }
+        if (ch === "+" || ch === "-") {
+            const isUnary = prev === null || prev === "op" || prev === "open";
+            const sym = ch === "-" ? "−" : "+";
+            html += isUnary ? sym : ` ${sym} `;
+            prev = "op";
+            i++;
+            continue;
+        }
+        if (ch === "×" || ch === "÷") { html += ` ${ch} `; prev = "op"; i++; continue; }
+        if (ch === "(") { html += "("; prev = "open"; i++; continue; }
+        if (ch === ")") { html += ")"; prev = "num"; i++; continue; }
+        html += ch;
+        i++;
+    }
+    return html;
+}
+
 // ---------- UI ----------
 
 const display = document.getElementById("display");
 
 function render() {
-    display.textContent = expression === "" ? "0" : expression;
+    display.innerHTML = expression === "" ? "0" : formatExpression(expression);
     display.classList.remove("error");
     // Shrink the font as the expression grows
-    display.style.fontSize = expression.length > 14
-        ? `clamp(20px, ${Math.max(16, 40 - (expression.length - 14) * 1.4)}px, 40px)`
+    display.style.fontSize = expression.length > 12
+        ? `clamp(20px, ${Math.max(16, 40 - (expression.length - 12) * 1.4)}px, 40px)`
         : "";
 }
 
@@ -144,7 +196,7 @@ function equals() {
     if (expression === "") return;
     try {
         const result = evaluateExpression(expression);
-        exprEl.textContent = expression + " =";
+        exprEl.innerHTML = formatExpression(expression) + " =";
         expression = formatResult(result);
         justEvaluated = true;
         render();
@@ -159,7 +211,7 @@ function applyUnary(fn, symbol) {
         const value = evaluateExpression(expression);
         const result = fn(value);
         if (!Number.isFinite(result)) throw new Error("Result is not finite");
-        exprEl.textContent = symbol + "(" + expression + ") =";
+        exprEl.innerHTML = symbol + "(" + formatExpression(expression) + ") =";
         expression = formatResult(result);
         justEvaluated = true;
         render();
