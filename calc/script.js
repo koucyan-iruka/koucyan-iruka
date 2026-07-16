@@ -225,7 +225,6 @@ const actions = {
     backspace: backspace,
     equals: equals,
     sqrt: () => applyUnary(Math.sqrt, "√"),
-    cbrt: () => applyUnary(Math.cbrt, "³√"),
     percent: () => applyUnary(v => v / 100, "%"),
 };
 

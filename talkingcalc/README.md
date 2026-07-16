@@ -9,7 +9,6 @@ Based on my <a href="https://github.com/koucyan-iruka/basic-calc">Basic Caluclat
 - Four arithmetic operations ( + - × ÷ )
 - Parentheses / Percent
 - Square root
-- Cube root
 - Exponentiation
 - Keyboard input
 - Smartphone & dark mode support

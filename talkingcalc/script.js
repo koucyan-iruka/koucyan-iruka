@@ -327,7 +327,6 @@ const actions = {
     backspace: backspace,
     equals: equals,
     sqrt: () => applyUnary(Math.sqrt, "√"),
-    cbrt: () => applyUnary(Math.cbrt, "³√"),
     percent: () => applyUnary(v => v / 100, "%"),
 };
 
@@ -497,26 +496,6 @@ const operationName = {
         "el": "τετραγωνική ρίζα",
         "he": "שורש ריבועי",
         "th": "รากที่สอง"
-    },
-    "³√": {
-        "en": "cube root",
-        "de": "Kubikwurzel",
-        "es": "raíz cúbica",
-        "fr": "racine cubique",
-        "hi": "घनमूल",
-        "id": "akar kubik",
-        "it": "radice cubica",
-        "ja": "立方根",
-        "ko": "세제곱근",
-        "nl": "derdemachtswortel",
-        "pl": "pierwiastek sześcienny",
-        "pt": "raiz cúbica",
-        "ru": "кубический корень",
-        "zh": "立方根",
-        "ar": "الجذر التكعيبي",
-        "el": "κυβική ρίζα",
-        "he": "שורש שלישי",
-        "th": "รากที่สาม"
     },
     "(": {
         "en": "open parenthesis",

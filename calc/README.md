@@ -4,7 +4,6 @@
 - 四則演算( + - × ÷ )
 - 括弧・パーセント
 - 平方根
-- 立方根
 - 累乗
 - キーボード入力対応
 - スマートフォン・ダークモード対応
@@ -15,7 +14,6 @@ A normal basic caluclator with using Javascript enbedded in HTML.
 - Four arithmetic operations ( + - × ÷ )
 - Parentheses / Percent
 - Square root
-- Cube root
 - Exponentiation
 - Keyboard input
 - Smartphone & dark mode support
