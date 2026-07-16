@@ -1,152 +1,300 @@
-// Check if the browser supports speech synthesis
-if (!"speechSynthesis" in window) {
-    $("#msg").html(
-        "Sorry. Your browser <strong>does not support</strong> speech synthesis."
-    );
+"use strict";
+
+// ---------- Speech ----------
+
+const speechSupported = "speechSynthesis" in window;
+
+if (!speechSupported) {
+    document.getElementById("speech-support-msg").hidden = false;
 }
 
-let currentLang = "";
-let error = 0;
-let answer = ""; 
+const voiceSelect = document.getElementById("voice-names");
+const rateInput = document.getElementById("rate");
+const rateValue = document.getElementById("rate-value");
+const muteInput = document.getElementById("mute");
 
-//Loading voices then make a list
+function getVoices() {
+    return speechSupported ? speechSynthesis.getVoices() : [];
+}
+
 function loadVoices() {
-    const voiceSelect = document.getElementById("voice-names");
-    voiceSelect.innerHTML = '';  
+    const voices = getVoices();
+    if (voices.length === 0) return;
 
-    const voices = speechSynthesis.getVoices();
+    const previous = voiceSelect.value;
+    voiceSelect.innerHTML = "";
+
     voices.forEach(voice => {
         const option = document.createElement("option");
         option.value = voice.name;
-        option.id = SpeechSynthesisVoice.lang;
-        option.text = `${voice.name} (${voice.lang})`; 
+        option.dataset.lang = voice.lang;
+        option.text = `${voice.name} (${voice.lang})`;
         voiceSelect.appendChild(option);
     });
-}
 
-function getSelectedVoiceLang() {
-    const selectedVoiceName = document.getElementById("voice-names").value; 
-    const voices = speechSynthesis.getVoices(); 
-
-    const selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
-
-    if (selectedVoice) {
-        return selectedVoice.lang; 
+    // Keep the user's choice across voice-list refreshes; otherwise prefer
+    // a voice matching the browser language.
+    if (previous && voices.some(voice => voice.name === previous)) {
+        voiceSelect.value = previous;
     } else {
-        return null;
+        const browserLang = (navigator.language || "en").substring(0, 2);
+        const match = voices.find(voice => voice.lang.substring(0, 2) === browserLang);
+        if (match) voiceSelect.value = match.name;
     }
 }
 
-function changeLanguage() {
-    currentLang = getSelectedVoiceLang().substring(0,2);
+function getSelectedVoice() {
+    return getVoices().find(voice => voice.name === voiceSelect.value) || null;
 }
 
-function speakOperation(value) {
-    if (operationName[value] && operationName[value][currentLang]) {
-        const opname = operationName[value][currentLang];
-        speak(opname); 
-    } else {
-        speak(value);
-    }
+function currentLang() {
+    const voice = getSelectedVoice();
+    return voice ? voice.lang.substring(0, 2) : (navigator.language || "en").substring(0, 2);
 }
 
 function speak(text) {
-    changeLanguage();
-    speechSynthesis.cancel()
-    const uttr = new SpeechSynthesisUtterance(text);
-
-    const selectedVoice = document.getElementById("voice-names").value;
-    uttr.voice = speechSynthesis.getVoices().filter(voice => voice.name == selectedVoice)[0];
-    uttr.rate = document.getElementById("rate").value; 
+    if (!speechSupported || muteInput.checked) return;
+    speechSynthesis.cancel();
+    const uttr = new SpeechSynthesisUtterance(String(text));
+    const voice = getSelectedVoice();
+    if (voice) {
+        uttr.voice = voice;
+        uttr.lang = voice.lang;
+    }
+    uttr.rate = parseFloat(rateInput.value);
     speechSynthesis.speak(uttr);
 }
-    
-function addToDisplay(value) {
-    changeLanguage();
-    if (error == 1){
-        document.calculator.display.value = '';
-        error = 0;
+
+// Speak the localized name of an operation, falling back to English,
+// then to the raw symbol.
+function speakOperation(symbol) {
+    const names = operationName[symbol];
+    if (names) {
+        speak(names[currentLang()] || names.en);
+    } else {
+        speak(symbol);
+    }
+}
+
+if (speechSupported) {
+    speechSynthesis.onvoiceschanged = loadVoices;
+    loadVoices();
+}
+
+rateInput.addEventListener("input", () => {
+    rateValue.textContent = parseFloat(rateInput.value).toFixed(1) + "×";
+});
+
+// ---------- Safe expression evaluation (no eval) ----------
+
+function tokenize(src) {
+    const tokens = [];
+    let i = 0;
+    while (i < src.length) {
+        const ch = src[i];
+        if (ch === " ") { i++; continue; }
+        if (/[0-9.]/.test(ch)) {
+            let num = "";
+            while (i < src.length && /[0-9.]/.test(src[i])) num += src[i++];
+            if (!/^(\d+\.?\d*|\.\d+)$/.test(num)) throw new Error("Invalid number");
+            tokens.push({ type: "num", value: parseFloat(num) });
+            continue;
+        }
+        if ("+-×÷^".includes(ch)) { tokens.push({ type: ch }); i++; continue; }
+        throw new Error("Invalid character");
+    }
+    return tokens;
+}
+
+function evaluateExpression(src) {
+    const tokens = tokenize(src);
+    let pos = 0;
+    const peek = () => tokens[pos];
+    const next = () => tokens[pos++];
+
+    function parseExpr() {
+        let left = parseTerm();
+        while (peek() && (peek().type === "+" || peek().type === "-")) {
+            const op = next().type;
+            const right = parseTerm();
+            left = op === "+" ? left + right : left - right;
+        }
+        return left;
     }
 
+    function parseTerm() {
+        let left = parsePower();
+        while (peek() && (peek().type === "×" || peek().type === "÷")) {
+            const op = next().type;
+            const right = parsePower();
+            left = op === "×" ? left * right : left / right;
+        }
+        return left;
+    }
+
+    // Right-associative exponentiation
+    function parsePower() {
+        const base = parseUnary();
+        if (peek() && peek().type === "^") {
+            next();
+            return base ** parsePower();
+        }
+        return base;
+    }
+
+    function parseUnary() {
+        if (peek() && (peek().type === "-" || peek().type === "+")) {
+            const op = next().type;
+            const value = parseUnary();
+            return op === "-" ? -value : value;
+        }
+        return parseAtom();
+    }
+
+    function parseAtom() {
+        const token = next();
+        if (!token) throw new Error("Unexpected end of expression");
+        if (token.type === "num") return token.value;
+        throw new Error("Unexpected token");
+    }
+
+    const result = parseExpr();
+    if (pos < tokens.length) throw new Error("Unexpected trailing input");
+    if (!Number.isFinite(result)) throw new Error("Result is not finite");
+    return result;
+}
+
+// Trim float noise like 0.30000000000000004 while keeping precision
+function formatResult(n) {
+    return String(parseFloat(n.toPrecision(12)));
+}
+
+// ---------- UI ----------
+
+const display = document.getElementById("display");
+const exprEl = document.getElementById("expression");
+
+let expression = "";
+let justEvaluated = false;
+
+function render() {
+    display.textContent = expression === "" ? "0" : expression;
+    display.classList.remove("error");
+    display.style.fontSize = expression.length > 14
+        ? `clamp(20px, ${Math.max(16, 40 - (expression.length - 14) * 1.4)}px, 40px)`
+        : "";
+}
+
+function showError() {
+    exprEl.innerHTML = "&nbsp;";
+    display.textContent = operationName["Error"][currentLang()] || operationName["Error"].en;
+    display.classList.add("error");
+    expression = "";
+    justEvaluated = true;
+    speakOperation("Error");
+}
+
+function insert(value) {
+    if (justEvaluated) {
+        if (!"+-×÷^".includes(value)) expression = "";
+        justEvaluated = false;
+    }
     if (operationName[value]) {
         speakOperation(value);
     } else {
         speak(value);
     }
-
-    if (value == "×"){
-        value = "*";
-    }else if (value == "÷"){
-        value = "/";
-    }else if (value == "^"){
-        value = "**";
-    }
-    document.calculator.display.value += value;
-    console.log(value);
+    expression += value;
+    exprEl.innerHTML = "&nbsp;";
+    render();
 }
 
-function clearDisplay() {
-    changeLanguage();
-    speechSynthesis.cancel();
-    document.calculator.display.value = '';
-    speak(operationName["C"][currentLang], currentLang);
-    answer = "";
+function clearAll() {
+    expression = "";
+    justEvaluated = false;
+    exprEl.innerHTML = "&nbsp;";
+    render();
+    speakOperation("C");
 }
 
-function gotError() {
-    error = '1';
-    document.calculator.display.value = operationName["Error"][currentLang], currentLang;
-    changeLanguage();
-    speak(operationName["Error"][currentLang], currentLang);
-}
-
-function calculate() {
-    changeLanguage();
-    speak(operationName["="][currentLang], currentLang);
-        try {
-            const result = eval(document.calculator.display.value);
-            document.calculator.display.value = result;
-            answer = result;
-            speak(result, currentLang); 
-            console.log('=',answer);
-        } catch (error) {
-            gotError();
-        }
-}
-
-// calclation of sqroot
-function sqrtcal() {
-    changeLanguage();
-    const value = document.calculator.display.value;
-    if (value) {
-        const result = Math.sqrt(value);
-        document.calculator.display.value = result;
-        speak(operationName["√"][currentLang] + " is " + result, currentLang); 
+function backspace() {
+    if (speechSupported) speechSynthesis.cancel();
+    if (justEvaluated) {
+        expression = "";
+        justEvaluated = false;
+        exprEl.innerHTML = "&nbsp;";
     } else {
-        gotError();
+        expression = expression.slice(0, -1);
+    }
+    render();
+}
+
+function equals() {
+    if (expression === "") return;
+    try {
+        const result = evaluateExpression(expression);
+        exprEl.textContent = expression + " =";
+        expression = formatResult(result);
+        justEvaluated = true;
+        render();
+        const equalsName = operationName["="][currentLang()] || operationName["="].en;
+        speak(`${equalsName} ${expression}`);
+    } catch (err) {
+        showError();
     }
 }
 
-// cbroot
-function cbrtcal() {
-    changeLanguage();
-    const value = document.calculator.display.value;
-    if (value) {
-        const result = Math.cbrt(value);
-        document.calculator.display.value = result;
-        speak(operationName["³√"][currentLang] + " is " + result, currentLang); 
-    } else {
-        gotError();
+function applyUnary(fn, symbol) {
+    if (expression === "") {
+        showError();
+        return;
+    }
+    try {
+        const value = evaluateExpression(expression);
+        const result = fn(value);
+        if (!Number.isFinite(result)) throw new Error("Result is not finite");
+        exprEl.textContent = symbol + "(" + expression + ") =";
+        expression = formatResult(result);
+        justEvaluated = true;
+        render();
+        const opName = operationName[symbol][currentLang()] || operationName[symbol].en;
+        speak(`${opName}, ${expression}`);
+    } catch (err) {
+        showError();
     }
 }
 
+const actions = {
+    clear: clearAll,
+    backspace: backspace,
+    equals: equals,
+    sqrt: () => applyUnary(Math.sqrt, "√"),
+    cbrt: () => applyUnary(Math.cbrt, "³√"),
+};
 
+document.querySelector(".keys").addEventListener("click", (event) => {
+    const key = event.target.closest("button.key");
+    if (!key) return;
+    if (key.dataset.action) actions[key.dataset.action]();
+    else if (key.dataset.insert) insert(key.dataset.insert);
+});
 
-window.speechSynthesis.onvoiceschanged = loadVoices;
-document.addEventListener('DOMContentLoaded', loadVoices());
+// Keyboard support
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if (/^[0-9.]$/.test(key)) { insert(key); }
+    else if (key === "+" || key === "-") { insert(key); }
+    else if (key === "*") { insert("×"); }
+    else if (key === "/") { event.preventDefault(); insert("÷"); }
+    else if (key === "^") { insert("^"); }
+    else if (key === "Enter" || key === "=") { event.preventDefault(); equals(); }
+    else if (key === "Backspace") { backspace(); }
+    else if (key === "Escape" || key === "Delete") { clearAll(); }
+});
 
+render();
 
-//Translations
+// ---------- Translations ----------
 
 const operationName = {
     "+": {
@@ -189,7 +337,7 @@ const operationName = {
         "he": "מינוס",
         "th": "ลบ"
     },
-    "*": {
+    "×": {
         "en": "times",
         "de": "mal",
         "es": "por",
@@ -209,7 +357,7 @@ const operationName = {
         "he": "כפול",
         "th": "คูณ"
     },
-    "/": {
+    "÷": {
         "en": "divided by",
         "de": "geteilt durch",
         "es": "dividido por",
@@ -229,7 +377,7 @@ const operationName = {
         "he": "חלקי",
         "th": "หาร"
     },
-    "**": {
+    "^": {
         "en": "to the power of",
         "de": "hoch",
         "es": "a la potencia de",
@@ -349,4 +497,4 @@ const operationName = {
         "he": "שגיאה",
         "th": "ข้อผิดพลาด"
     }
-}
+};

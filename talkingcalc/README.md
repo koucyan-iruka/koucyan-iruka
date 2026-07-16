@@ -5,7 +5,10 @@ Based on my <a href="https://github.com/koucyan-iruka/basic-calc">Basic Caluclat
 - Read aloud pressed numbers and results
 - Selectable voices and languages (depends on your browser)
 - Adjustable speech rate
+- Mute toggle
 - Four arithmetic operations ( + - × ÷ )
 - Square root
 - Cube root
 - Exponentiation
+- Keyboard input
+- Smartphone & dark mode support

@@ -2,65 +2,76 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#eef1f7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0b0d14" media="(prefers-color-scheme: dark)">
+    <meta name="description" content="しゃべる電卓です。多言語対応(ブラウザに依存します)">
+    <title>Talking Calculator</title>
     <link rel="icon" href="../icns/tkcal.svg">
-    <title>Calclator</title>
-    <label hidden>しゃべる電卓です。多言語対応(ブラウザに依存します) </label>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
 
-    <div class="calculator">
-        <form name="calculator">
-            <div class="disp">
-            <input type="text" name="display" id="display" disabled class="disp" placeholder="0">
-            </div>
-                <br>
-                <br>
-            <input type="button" class="btn-op" value="√" onclick="sqrtcal()">
-            <input type="button" class="btn-op" value="³√" onclick="cbrtcal()">
-            <input type="button" class="btn-op" value="^" onclick="addToDisplay('**')">
-            <input type="button" class="btn-cl" value="C" onclick="clearDisplay()">
-                <br>
-                <br>
-            <input type="button" class="btn-large" value="7" onclick="addToDisplay('7')">
-            <input type="button" class="btn-large" value="8" onclick="addToDisplay('8')">
-            <input type="button" class="btn-large" value="9" onclick="addToDisplay('9')">
-            <input type="button" class="btn-op" value="÷" onclick="addToDisplay('/')">
-                <br>
-                <br>
-            <input type="button" class="btn-large" value="4" onclick="addToDisplay('4')">
-            <input type="button" class="btn-large" value="5" onclick="addToDisplay('5')">
-            <input type="button" class="btn-large" value="6" onclick="addToDisplay('6')">
-            <input type="button" class="btn-op" value="×" onclick="addToDisplay('*')">
-                <br>
-                <br>
-            <input type="button" class="btn-large" value="1" onclick="addToDisplay('1')">
-            <input type="button" class="btn-large" value="2" onclick="addToDisplay('2')">
-            <input type="button" class="btn-large" value="3" onclick="addToDisplay('3')">
-            <input type="button" class="btn-op" value="-" onclick="addToDisplay('-')">
-                <br>
-                <br>
-            <input type="button" class="btn-large" value="0" onclick="addToDisplay('0')">
-            <input type="button" class="btn-large" value="." onclick="addToDisplay('.')">
-            <input type="button" class="btn-eq" value="=" onclick="calculate()">
-            <input type="button" class="btn-op" value="+" onclick="addToDisplay('+')">
-        </form>
-    </div>
-        <br>
-        <br>
-        <br>
-    <div class="lang-select">
-        <label>音声 / (言語)</label>
-        <select id="voice-names" class="browser-default"></select>
-    </div>
-    <br>
-    <div class="speech-rate">
-        <label>速度</label><input id="rate" type="range" min="0.5" max="2" step="0.1" value="1" class="range">
-    </div>
+    <main class="calculator" aria-label="Talking Calculator">
+        <div class="screen">
+            <div class="expression" id="expression" aria-hidden="true">&nbsp;</div>
+            <output class="display" id="display" aria-live="polite">0</output>
+        </div>
+
+        <div class="keys">
+            <button type="button" class="key op"  data-action="sqrt">√</button>
+            <button type="button" class="key op"  data-action="cbrt">³√</button>
+            <button type="button" class="key op"  data-insert="^">xʸ</button>
+            <button type="button" class="key cl"  data-action="clear">C</button>
+
+            <button type="button" class="key num" data-insert="7">7</button>
+            <button type="button" class="key num" data-insert="8">8</button>
+            <button type="button" class="key num" data-insert="9">9</button>
+            <button type="button" class="key op"  data-insert="÷">÷</button>
+
+            <button type="button" class="key num" data-insert="4">4</button>
+            <button type="button" class="key num" data-insert="5">5</button>
+            <button type="button" class="key num" data-insert="6">6</button>
+            <button type="button" class="key op"  data-insert="×">×</button>
+
+            <button type="button" class="key num" data-insert="1">1</button>
+            <button type="button" class="key num" data-insert="2">2</button>
+            <button type="button" class="key num" data-insert="3">3</button>
+            <button type="button" class="key op"  data-insert="-">−</button>
+
+            <button type="button" class="key num" data-insert="0">0</button>
+            <button type="button" class="key num" data-insert=".">.</button>
+            <button type="button" class="key op"  data-action="backspace" aria-label="Backspace">⌫</button>
+            <button type="button" class="key op"  data-insert="+">+</button>
+
+            <button type="button" class="key eq wide" data-action="equals">=</button>
+        </div>
+    </main>
+
+    <section class="settings" aria-label="Voice settings">
+        <p class="settings-note" id="speech-support-msg" hidden>
+            お使いのブラウザは音声合成に対応していません。 / Your browser does not support speech synthesis.
+        </p>
+        <div class="setting-row">
+            <label for="voice-names">音声 / Voice</label>
+            <select id="voice-names"></select>
+        </div>
+        <div class="setting-row">
+            <label for="rate">速度 / Rate</label>
+            <input id="rate" type="range" min="0.5" max="2" step="0.1" value="1" class="range">
+            <span class="rate-value" id="rate-value">1.0×</span>
+        </div>
+        <div class="setting-row">
+            <label for="mute">消音 / Mute</label>
+            <input id="mute" type="checkbox">
+        </div>
+    </section>
 
     <script src="script.js"></script>
-
 </body>
 </html>
