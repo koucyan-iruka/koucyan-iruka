@@ -1,324 +1,175 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Koki — Tools</title>
+  <meta name="description" content="App support and contact information for apps by Kouki." />
+  <title>App Support | Kouki</title>
   <link rel="icon" href="icns/fav.svg" />
   <style>
     :root {
       --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Hiragino Sans", "Helvetica Neue", sans-serif;
-      --transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      --bg: #f6f7fb;
+      --surface: rgba(255, 255, 255, .78);
+      --surface-strong: #fff;
+      --text: #15171c;
+      --muted: #69707d;
+      --line: rgba(21, 23, 28, .1);
+      --accent: #1769e0;
+      --accent-soft: #e8f0ff;
+      --shadow: 0 18px 50px rgba(23, 38, 68, .08);
     }
 
     [data-theme="dark"] {
-      --bg:        #000;
-      --text:      rgba(255,255,255,0.92);
-      --text-sub:  rgba(255,255,255,0.45);
-      --text-dim:  rgba(255,255,255,0.22);
-      --border:    rgba(255,255,255,0.11);
-      --border-hi: rgba(255,255,255,0.22);
-      --glass-bg:  rgba(255,255,255,0.055);
-      --glass-hi:  rgba(255,255,255,0.10);
-      --accent:    #2997ff;
+      --bg: #101216;
+      --surface: rgba(29, 32, 39, .82);
+      --surface-strong: #1d2027;
+      --text: #f5f7fb;
+      --muted: #a8afbc;
+      --line: rgba(255, 255, 255, .12);
+      --accent: #70a7ff;
+      --accent-soft: rgba(112, 167, 255, .14);
+      --shadow: 0 18px 50px rgba(0, 0, 0, .22);
     }
 
-    [data-theme="light"] {
-      --bg:        #f2f2f7;
-      --text:      rgba(0,0,0,0.88);
-      --text-sub:  rgba(0,0,0,0.44);
-      --text-dim:  rgba(0,0,0,0.22);
-      --border:    rgba(0,0,0,0.08);
-      --border-hi: rgba(0,0,0,0.15);
-      --glass-bg:  rgba(255,255,255,0.58);
-      --glass-hi:  rgba(255,255,255,0.80);
-      --accent:    #0071e3;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-x: hidden;
-      transition: background 0.4s, color 0.4s;
-    }
-
-    /* Blobs */
-    .mesh {
-      position: fixed; inset: 0;
-      pointer-events: none; overflow: hidden;
-      z-index: 0;
-    }
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      animation: drift 18s ease-in-out infinite;
-    }
-    .blob:nth-child(1) {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(41,151,255,.18) 0%, transparent 70%);
-      top: -8%; left: -8%;
-    }
-    .blob:nth-child(2) {
-      width: 420px; height: 420px;
-      background: radial-gradient(circle, rgba(48,209,88,.12) 0%, transparent 70%);
-      bottom: 0; right: -4%;
-      animation-delay: -7s;
-    }
-    .blob:nth-child(3) {
-      width: 320px; height: 320px;
-      background: radial-gradient(circle, rgba(255,159,10,.09) 0%, transparent 70%);
-      top: 48%; left: 44%;
-      animation-delay: -14s;
-    }
-    [data-theme="light"] .blob:nth-child(1) {
-      background: radial-gradient(circle, rgba(0,113,227,.11) 0%, transparent 70%);
-    }
-    [data-theme="light"] .blob:nth-child(2) {
-      background: radial-gradient(circle, rgba(26,158,63,.08) 0%, transparent 70%);
-    }
-    @keyframes drift {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33%      { transform: translate(28px,-18px) scale(1.04); }
-      66%      { transform: translate(-18px,14px) scale(0.97); }
-    }
-
-    /* Main content */
-    .container {
-      position: relative; z-index: 1;
-      text-align: center;
-      padding: 48px 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-    }
-
-    /* Title */
-    h1 {
-      font-size: clamp(44px, 9vw, 76px);
-      font-weight: 700;
-      letter-spacing: -0.045em;
-      line-height: 1.0;
-      margin-bottom: 16px;
-      background: linear-gradient(155deg,
-        var(--text) 0%,
-        rgba(41,151,255,.9) 52%,
-        rgba(48,209,88,.8) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      opacity: 0;
-      animation: fadeUp 0.65s ease forwards 0.1s;
-    }
-    [data-theme="light"] h1 {
-      background: linear-gradient(155deg,
-        rgba(0,0,0,.84) 0%,
-        rgba(0,113,227,.9) 52%,
-        rgba(26,158,63,.85) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .sub {
-      font-size: clamp(13px, 2vw, 15px);
-      color: var(--text-sub);
       line-height: 1.7;
-      margin-bottom: 44px;
-      opacity: 0;
-      animation: fadeUp 0.65s ease forwards 0.22s;
+      transition: background .3s, color .3s;
     }
-
-    /* Tool grid */
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: min(100%, 480px);
-      opacity: 0;
-      animation: fadeUp 0.65s ease forwards 0.34s;
+    a { color: inherit; }
+    .page { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+    .brand { font-size: 17px; font-weight: 700; text-decoration: none; }
+    .topbar nav { display: flex; align-items: center; gap: 20px; }
+    .topbar nav a { color: var(--muted); font-size: 13px; text-decoration: none; }
+    .topbar nav a:hover { color: var(--accent); }
+    .theme-button {
+      width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%;
+      background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center;
     }
-
-    .tool-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 22px 10px;
-      border-radius: 20px;
-      text-decoration: none;
-      color: var(--text);
-      background: var(--glass-bg);
-      backdrop-filter: saturate(180%) blur(28px);
-      -webkit-backdrop-filter: saturate(180%) blur(28px);
-      border: 1px solid var(--border);
-      position: relative; overflow: hidden;
-      transition: transform var(--transition), border-color .25s, background .25s;
+    [data-theme="light"] .moon, [data-theme="dark"] .sun { display: none; }
+    .hero { padding: 90px 0 110px; max-width: 700px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+    h1 { margin: 16px 0 20px; font-size: clamp(42px, 7vw, 76px); line-height: 1.08; letter-spacing: -.05em; }
+    .lead { max-width: 560px; margin: 0; color: var(--muted); font-size: 18px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px;
+      border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none;
+      transition: transform .2s, background .2s;
     }
-    .tool-btn::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-hi), transparent);
-      pointer-events: none;
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 22px rgba(23, 105, 224, .2); }
+    .button-secondary { border: 1px solid var(--line); background: var(--surface); }
+    .section { padding: 76px 0; border-top: 1px solid var(--line); }
+    .section-heading { margin-bottom: 28px; }
+    .section-heading h2 { margin: 6px 0 8px; font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .app-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .app-card {
+      display: grid; grid-template-columns: 76px 1fr; gap: 18px; padding: 22px;
+      border: 1px solid var(--line); border-radius: 16px; background: var(--surface);
+      box-shadow: var(--shadow); backdrop-filter: blur(18px);
     }
-    .tool-btn:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: var(--border-hi);
-      background: var(--glass-hi);
-    }
-    .tool-btn:active {
-      transform: scale(0.97);
-    }
-    .tool-btn img {
-      width: 34px; height: 34px;
-      object-fit: contain;
-    }
-    .tool-label {
-      font-size: 12px; font-weight: 500;
-      color: var(--text-sub); text-align: center; line-height: 1.3;
-      transition: color .2s;
-    }
-    .tool-btn:hover .tool-label { color: var(--text); }
-
-    /* Theme toggle */
-    .toggle-btn {
-      position: fixed;
-      top: 20px; right: 20px;
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-sub);
-      transition: background 0.2s, transform 0.2s;
-      z-index: 100;
-    }
-    .toggle-btn:hover { background: var(--glass-hi); transform: scale(1.08); }
-
-    [data-theme="light"]  .icon-moon { display: block; }
-    [data-theme="light"]  .icon-sun  { display: none;  }
-    [data-theme="dark"]   .icon-moon { display: none;  }
-    [data-theme="dark"]   .icon-sun  { display: block; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    ::selection { background: rgba(41,151,255,0.28); }
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-
-    @media (max-width: 400px) {
-      .tool-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .tool-btn { padding: 18px 8px; }
+    .app-icon { width: 76px; height: 76px; border-radius: 18px; object-fit: cover; background: var(--accent-soft); }
+    .app-card h3 { margin: 2px 0 5px; font-size: 19px; }
+    .app-card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .store-link { display: inline-block; margin-top: 12px; color: var(--accent); font-size: 13px; font-weight: 700; text-decoration: none; }
+    .contact-panel { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 28px; padding: 28px; border-radius: 16px; background: var(--accent-soft); }
+    .contact-panel h2 { margin: 0 0 6px; font-size: 24px; }
+    .contact-panel p { margin: 0; color: var(--muted); font-size: 14px; }
+    footer { display: flex; justify-content: space-between; gap: 16px; padding: 30px 0 42px; color: var(--muted); font-size: 12px; }
+    footer a { text-decoration: none; }
+    @media (max-width: 680px) {
+      .page { padding: 0 18px; }
+      .topbar nav a { display: none; }
+      .hero { padding: 64px 0 76px; }
+      .lead { font-size: 16px; }
+      .app-grid, .contact-panel { grid-template-columns: 1fr; }
+      .contact-panel .button { justify-self: start; }
+      footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="index.html">Kouki</a>
+      <nav aria-label="Page navigation">
+        <a href="#apps">Apps</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-button" id="themeButton" type="button" aria-label="Toggle theme">
+          <span class="sun" aria-hidden="true">☀</span><span class="moon" aria-hidden="true">☾</span>
+        </button>
+      </nav>
+    </header>
 
-  <div class="mesh">
-    <div class="blob"></div>
-    <div class="blob"></div>
-    <div class="blob"></div>
-  </div>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="eyebrow">APP SUPPORT</div>
+        <h1 id="page-title">App support</h1>
+        <p class="lead">We welcome questions, bug reports, and feedback about our apps. When contacting us, please include the app name, device, and operating system version.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contact">Contact support</a>
+          <a class="button button-secondary" href="#apps">Released apps</a>
+        </div>
+      </section>
 
-  <!-- Theme toggle -->
-  <button class="toggle-btn" id="themeBtn" aria-label="テーマ切替">
-    <svg class="icon-sun" width="14" height="14" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-    <svg class="icon-moon" width="13" height="13" viewBox="0 0 24 24" fill="none"
-         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-    </svg>
-  </button>
+      <section class="section" id="apps" aria-labelledby="apps-title">
+        <div class="section-heading">
+          <div class="eyebrow">RELEASED APPS</div>
+          <h2 id="apps-title">Released apps</h2>
+          <p>Explore our apps currently available to users.</p>
+        </div>
+        <div class="app-grid">
+          <article class="app-card">
+            <img class="app-icon" src="icns/apps/eCR.png" alt="ChangeRate app icon" />
+            <div><h3>ChangeRate</h3><p>A simple currency converter for quick calculations at travel. Automatically detects the currency based on your location.</p><a class="store-link" href="#">View on the App Store →</a></div>
+          </article>
+          <!--
+          <article class="app-card">
+            <img class="app-icon" src="icns/tkcal.svg" alt="Talking Calculator app icon" />
+            <div><h3>Talking Calculator</h3><p>An accessible calculator that reads calculation results aloud.</p><a class="store-link" href="#">View on the App Store →</a></div>
+          </article>
+          <article class="app-card">
+            <img class="app-icon" src="icns/clc.svg" alt="Clock app icon" />
+            <div><h3>Clock</h3><p>A clean, easy-to-read clock designed for everyday use.</p><a class="store-link" href="#">View on the App Store →</a></div>
+          </article>
+          <article class="app-card">
+            <img class="app-icon" src="icns/nengo.svg" alt="Japanese Era Converter app icon" />
+            <div><h3>Japanese Era Converter</h3><p>A convenient way to convert between Japanese eras and Gregorian years.</p><a class="store-link" href="#">View on the App Store →</a></div>
+          </article>
+           -->
+        </div>
+      </section>
 
-  <div class="container">
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-panel">
+          <div><h2 id="contact-title">Contact us</h2><p>Please use the form below to get in touch. We will review your message and reply when necessary.</p></div>
+          <a class="button button-primary" href="https://forms.gle/d5uZeDyet4CxxyMRA" target="_blank" rel="noopener">Open Google Form ↗</a>
+        </div>
+      </section>
+    </main>
 
-    <h1>Tools.</h1>
-
-    <p class="sub">ブラウザでそのまま使える小さなツール集</p>
-
-    <div class="tool-grid">
-
-      <a href="calc/index.html" class="tool-btn">
-        <img src="icns/cal.svg" alt="" />
-        <span class="tool-label">電卓</span>
-      </a>
-
-      <a href="talkingcalc/index.html" class="tool-btn">
-        <img src="icns/tkcal.svg" alt="" />
-        <span class="tool-label">読上げ電卓</span>
-      </a>
-
-      <a href="sphere/index.html" class="tool-btn">
-        <img src="icns/pi.svg" alt="" />
-        <span class="tool-label">球体表面積</span>
-      </a>
-
-      <a href="baseconv/index.html" class="tool-btn">
-        <img src="icns/nbc.svg" alt="" />
-        <span class="tool-label">n進変換機</span>
-      </a>
-
-      <a href="clock/index.html" class="tool-btn">
-        <img src="icns/clc.svg" alt="" />
-        <span class="tool-label">時計</span>
-      </a>
-
-      <a href="nengou/index.html" class="tool-btn">
-        <img src="icns/nengo.svg" alt="" />
-        <span class="tool-label">年号変換</span>
-      </a>
-
-      <a href="counter/index.html" class="tool-btn">
-        <img src="icns/cnt.svg" alt="" />
-        <span class="tool-label">カウンタ</span>
-      </a>
-
-    </div>
+    <footer><span>© Kouki</span><span><a href="#">Privacy Policy</a>　<a href="#">Terms of Use</a></span></footer>
   </div>
 
   <script>
     const html = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-
-    const saved = localStorage.getItem('theme');
-    if (saved) {
-      html.setAttribute('data-theme', saved);
-    } else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      html.setAttribute('data-theme', 'light');
-    }
-
-    themeBtn.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      themeBtn.style.transform = 'scale(0.75) rotate(30deg)';
-      setTimeout(() => themeBtn.style.transform = '', 260);
+    const themeButton = document.getElementById('themeButton');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) html.setAttribute('data-theme', savedTheme);
+    themeButton.addEventListener('click', () => {
+      const nextTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
     });
   </script>
-
 </body>
 </html>
