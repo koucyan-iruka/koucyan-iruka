@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161b2e"/>
+      <stop offset="1" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366f1"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#6366f1" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#6366f1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip"><rect x="1" y="1" width="438" height="148" rx="18"/></clipPath>
+  </defs>
+  <style>
+    .shine { animation: sweep 6s ease-in-out infinite; }
+    @keyframes sweep { 0%, 60% { transform: translateX(-200px); } 100% { transform: translateX(640px); } }
+    .title { font: 700 20px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #f8fafc; }
+    .desc { font: 400 13.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+    .tag { font: 700 10.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 1px; fill: #6366f1; }
+    .open { font: 600 12px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #cbd5e1; }
+  </style>
+  <g clip-path="url(#clip)">
+    <rect width="440" height="150" fill="url(#bg)"/>
+    <rect width="440" height="150" fill="url(#glow)"/>
+    <rect width="5" height="150" fill="url(#accent)"/>
+    <rect class="shine" x="0" y="0" width="160" height="150" fill="url(#shine)" transform="skewX(-20)"/>
+  </g>
+  <rect x="1" y="1" width="438" height="148" rx="18" fill="none" stroke="url(#accent)" stroke-opacity="0.55" stroke-width="1.5"/>
+
+  <rect x="26" y="33" width="84" height="84" rx="20" fill="url(#accent)" opacity="0.9"/>
+  <rect x="30" y="37" width="76" height="76" rx="17" fill="#ffffff"/>
+  <image x="42" y="49" width="52" height="52" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iX+ODrOOCpOODpOODvF8xIiBkYXRhLW5hbWU9IuODrOOCpOODpOODvCAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMi4yMSIgaGVpZ2h0PSI0Ny4xOCIgdmlld0JveD0iMCAwIDMyLjIxIDQ3LjE4Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjZmZmOwogICAgICAgIHN0cm9rZTogIzIzMTgxNTsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iLjUiIHk9Ii41IiB3aWR0aD0iMzEuMjEiIGhlaWdodD0iNDYuMTgiIHJ4PSI2Ljc1IiByeT0iNi43NSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMy41NyIgeT0iNC4xNyIgd2lkdGg9IjI1LjA4IiBoZWlnaHQ9IjcuNzYiIHJ4PSIxLjkiIHJ5PSIxLjkiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjcuMDMiIHk9IjE2LjM4IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS40OSIgcnk9IjEuNDkiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xNS42NSwxNi4zOGguOTFjLjgzLDAsMS41MS42OCwxLjUxLDEuNTF2LjkxYzAsLjg0LS42OCwxLjUyLTEuNTIsMS41MmgtLjljLS44NCwwLTEuNTItLjY4LTEuNTItMS41MnYtLjljMC0uODQuNjgtMS41MiwxLjUyLTEuNTJaIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyMS4yNSIgeT0iMTYuMzgiIHdpZHRoPSIzLjk0IiBoZWlnaHQ9IjMuOTQiIHJ4PSIxLjQ4IiByeT0iMS40OCIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNy4wMyIgeT0iMjMuNDQiIHdpZHRoPSIzLjk0IiBoZWlnaHQ9IjMuOTQiIHJ4PSIxLjU1IiByeT0iMS41NSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iMTQuMTQiIHk9IjIzLjQ0IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS41MSIgcnk9IjEuNTEiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjIxLjI1IiB5PSIyMy40NCIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNSIgcnk9IjEuNSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNy4wMyIgeT0iMzAuNyIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNDgiIHJ5PSIxLjQ4Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNC4xNCIgeT0iMzAuNyIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNTEiIHJ5PSIxLjUxIi8+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIyMS4yNSIgeT0iMzAuNyIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNSIgcnk9IjEuNSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtMSIgeD0iNy4wMyIgeT0iMzcuNDkiIHdpZHRoPSIxMS4yMyIgaGVpZ2h0PSIzLjk0IiByeD0iMSIgcnk9IjEiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTEiIHg9IjIxLjI1IiB5PSIzNy40OSIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNSIgcnk9IjEuNSIvPgo8L3N2Zz4="/>
+
+  <rect x="132" y="28" width="90" height="20" rx="10" fill="#6366f1" fill-opacity="0.14" stroke="#6366f1" stroke-opacity="0.45"/>
+  <text class="tag" x="177" y="42" text-anchor="middle">CALCULATOR</text>
+  <text class="title" x="132" y="76">Calculator</text>
+  <text class="desc" x="132" y="100">A clean, everyday calculator</text>
+  <text class="desc" x="132" y="119">with basic operations and %.</text>
+  <text class="open" x="418" y="134" text-anchor="end">Open ↗</text>
+</svg>

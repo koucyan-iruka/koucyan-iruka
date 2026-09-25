@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161b2e"/>
+      <stop offset="1" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="1" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#14b8a6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#14b8a6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip"><rect x="1" y="1" width="438" height="148" rx="18"/></clipPath>
+  </defs>
+  <style>
+    .shine { animation: sweep 6s ease-in-out infinite; }
+    @keyframes sweep { 0%, 60% { transform: translateX(-200px); } 100% { transform: translateX(640px); } }
+    .title { font: 700 20px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #f8fafc; }
+    .desc { font: 400 13.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+    .tag { font: 700 10.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 1px; fill: #14b8a6; }
+    .open { font: 600 12px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #cbd5e1; }
+  </style>
+  <g clip-path="url(#clip)">
+    <rect width="440" height="150" fill="url(#bg)"/>
+    <rect width="440" height="150" fill="url(#glow)"/>
+    <rect width="5" height="150" fill="url(#accent)"/>
+    <rect class="shine" x="0" y="0" width="160" height="150" fill="url(#shine)" transform="skewX(-20)"/>
+  </g>
+  <rect x="1" y="1" width="438" height="148" rx="18" fill="none" stroke="url(#accent)" stroke-opacity="0.55" stroke-width="1.5"/>
+
+  <rect x="26" y="33" width="84" height="84" rx="20" fill="url(#accent)" opacity="0.9"/>
+  <rect x="30" y="37" width="76" height="76" rx="17" fill="#ffffff"/>
+  <image x="42" y="49" width="52" height="52" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iX+ODrOOCpOODpOODvF8xIiBkYXRhLW5hbWU9IuODrOOCpOODpOODvCAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NC44NyIgaGVpZ2h0PSI0NC44NyIgdmlld0JveD0iMCAwIDQ0Ljg3IDQ0Ljg3Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjMDAwOwogICAgICAgIGZvbnQtZmFtaWx5OiBLbGVlLURlbWlib2xkLTgzcHYtUktTSi1ILCBLbGVlOwogICAgICAgIGZvbnQtc2l6ZTogMjRweDsKICAgICAgICBmb250LXdlaWdodDogMzAwOwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgICAgc3Ryb2tlOiAjMjMxODE1OwogICAgICAgIHN0cm9rZS1taXRlcmxpbWl0OiAxMDsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGNpcmNsZSBjbGFzcz0iY2xzLTIiIGN4PSIyMi40NCIgY3k9IjIyLjQ0IiByPSIyMS45NCIvPgogIDx0ZXh0IGNsYXNzPSJjbHMtMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAuMzMgMjguNDIpIj48dHNwYW4geD0iMCIgeT0iMCI+z4A8L3RzcGFuPjwvdGV4dD4KPC9zdmc+"/>
+
+  <rect x="132" y="28" width="47" height="20" rx="10" fill="#14b8a6" fill-opacity="0.14" stroke="#14b8a6" stroke-opacity="0.45"/>
+  <text class="tag" x="155" y="42" text-anchor="middle">MATH</text>
+  <text class="title" x="132" y="76">Sphere Calculator</text>
+  <text class="desc" x="132" y="100">Surface area and volume</text>
+  <text class="desc" x="132" y="119">of a sphere from its radius.</text>
+  <text class="open" x="418" y="134" text-anchor="end">Open ↗</text>
+</svg>

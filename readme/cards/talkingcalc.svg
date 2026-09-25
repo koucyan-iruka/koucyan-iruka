@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="150" viewBox="0 0 440 150">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#161b2e"/>
+      <stop offset="1" stop-color="#0b0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.2" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip"><rect x="1" y="1" width="438" height="148" rx="18"/></clipPath>
+  </defs>
+  <style>
+    .shine { animation: sweep 6s ease-in-out infinite; }
+    @keyframes sweep { 0%, 60% { transform: translateX(-200px); } 100% { transform: translateX(640px); } }
+    .title { font: 700 20px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #f8fafc; }
+    .desc { font: 400 13.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #94a3b8; }
+    .tag { font: 700 10.5px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: 1px; fill: #8b5cf6; }
+    .open { font: 600 12px -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: #cbd5e1; }
+  </style>
+  <g clip-path="url(#clip)">
+    <rect width="440" height="150" fill="url(#bg)"/>
+    <rect width="440" height="150" fill="url(#glow)"/>
+    <rect width="5" height="150" fill="url(#accent)"/>
+    <rect class="shine" x="0" y="0" width="160" height="150" fill="url(#shine)" transform="skewX(-20)"/>
+  </g>
+  <rect x="1" y="1" width="438" height="148" rx="18" fill="none" stroke="url(#accent)" stroke-opacity="0.55" stroke-width="1.5"/>
+
+  <rect x="26" y="33" width="84" height="84" rx="20" fill="url(#accent)" opacity="0.9"/>
+  <rect x="30" y="37" width="76" height="76" rx="17" fill="#ffffff"/>
+  <image x="42" y="49" width="52" height="52" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iX+ODrOOCpOODpOODvF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMi4yMSIgaGVpZ2h0PSI0Ny4xOCIgdmlld0JveD0iMCAwIDMyLjIxIDQ3LjE4Ij4KICA8ZGVmcz4KICAgIDxzdHlsZT4KICAgICAgLmNscy0xIHsKICAgICAgICBmaWxsOiAjZGZlOWVmOwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICM4Yjk3OWU7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogI2IwYmRjNjsKICAgICAgfQoKICAgICAgLmNscy00IHsKICAgICAgICBmaWxsOiAjZmZmOwogICAgICAgIHN0cm9rZTogIzIzMTgxNTsKICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdDogMTA7CiAgICAgIH0KCiAgICAgIC5jbHMtNSB7CiAgICAgICAgZmlsbDogIzMzMzsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIuNSIgeT0iLjUiIHdpZHRoPSIzMS4yMSIgaGVpZ2h0PSI0Ni4xOCIgcng9IjYuNzUiIHJ5PSI2Ljc1Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIzLjU3IiB5PSI0LjE3IiB3aWR0aD0iMjUuMDgiIGhlaWdodD0iNy43NiIgcng9IjEuOSIgcnk9IjEuOSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iNy4wMyIgeT0iMTYuMzgiIHdpZHRoPSIzLjk0IiBoZWlnaHQ9IjMuOTQiIHJ4PSIxLjQ5IiByeT0iMS40OSIvPgogIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTE1LjY1LDE2LjM4aC45MWMuODMsMCwxLjUxLjY4LDEuNTEsMS41MXYuOTFjMCwuODQtLjY4LDEuNTItMS41MiwxLjUyaC0uOWMtLjg0LDAtMS41Mi0uNjgtMS41Mi0xLjUydi0uOWMwLS44NC42OC0xLjUyLDEuNTItMS41MloiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjIxLjI1IiB5PSIxNi4zOCIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNDgiIHJ5PSIxLjQ4Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSI3LjAzIiB5PSIyMy40NCIgd2lkdGg9IjMuOTQiIGhlaWdodD0iMy45NCIgcng9IjEuNTUiIHJ5PSIxLjU1Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSIxNC4xNCIgeT0iMjMuNDQiIHdpZHRoPSIzLjk0IiBoZWlnaHQ9IjMuOTQiIHJ4PSIxLjUxIiByeT0iMS41MSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iMjEuMjUiIHk9IjIzLjQ0IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS41IiByeT0iMS41Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSI3LjAzIiB5PSIzMC43IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS40OCIgcnk9IjEuNDgiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjE0LjE0IiB5PSIzMC43IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS41MSIgcnk9IjEuNTEiLz4KICA8cmVjdCBjbGFzcz0iY2xzLTQiIHg9IjIxLjI1IiB5PSIzMC43IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS41IiByeT0iMS41Ii8+CiAgPHJlY3QgY2xhc3M9ImNscy00IiB4PSI3LjAzIiB5PSIzNy40OSIgd2lkdGg9IjExLjIzIiBoZWlnaHQ9IjMuOTQiIHJ4PSIxIiByeT0iMSIvPgogIDxyZWN0IGNsYXNzPSJjbHMtNCIgeD0iMjEuMjUiIHk9IjM3LjQ5IiB3aWR0aD0iMy45NCIgaGVpZ2h0PSIzLjk0IiByeD0iMS41IiByeT0iMS41Ii8+CiAgPGc+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMy42OSw5LjA4aC0uNjljLS4yLDAtLjM1LS4xNS0uMzUtLjMzdi0xLjc3YzAtLjE4LjE2LS4zMy4zNS0uMzNoLjY5djIuNDRaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMy42OSw5LjA4aC0uNjljLS4yLDAtLjM1LS4xNS0uMzUtLjMzdi0xLjc3YzAtLjE4LjE2LS4zMy4zNS0uMzNoLjY5djIuNDRaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xNS40NCw1LjA3Yy4xMi0uMTItMS43NSwxLjU3LTEuNzUsMS41N3YyLjQ0cy45Ni43NCwxLjc1LDEuNTd2LTUuNThaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik0xNS43NCw3LjI1djEuMjNjLjM2LDAsLjY2LS4yNy42Ni0uNjFzLS4yOS0uNjEtLjY2LS42MVoiLz4KICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTE1Ljc0LDEwLjczYzAsLjA4LS4wNy4xNC0uMTUuMTRzLS4xNS0uMDYtLjE1LS4xNHYtNS43MmMwLS4wOC4wNy0uMTQuMTUtLjE0cy4xNS4wNi4xNS4xNHY1LjcyaDBaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xMy42OSw4LjYzaC0uNjljLS4yLDAtLjM1LS4wOS0uMzUtLjIxdi0xLjEyYzAtLjEyLjE2LS4yMS4zNS0uMjFoLjY5djEuNTNaIi8+CiAgICA8cGF0aCBjbGFzcz0iY2xzLTMiIGQ9Ik0xMy42OSw4LjYzaC0uNjljLS4yLDAtLjM1LS4wOS0uMzUtLjIxdi0xLjEyYzAtLjEyLjE2LS4yMS4zNS0uMjFoLjY5djEuNTNaIi8+CiAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTUuNDQgNi4xMSAxMy42OSA3LjEgMTMuNjkgOC42MyAxNS40NCA5LjYyIDE1LjQ0IDYuMTEiLz4KICAgIDxyZWN0IGNsYXNzPSJjbHMtMiIgeD0iMTUuNDQiIHk9IjYuMTEiIHdpZHRoPSIuMyIgaGVpZ2h0PSIzLjUxIi8+CiAgICA8cmVjdCBjbGFzcz0iY2xzLTUiIHg9IjEzIiB5PSI2LjY1IiB3aWR0aD0iLjY5IiBoZWlnaHQ9IjIuNDQiLz4KICA8L2c+Cjwvc3ZnPgo="/>
+
+  <rect x="132" y="28" width="112" height="20" rx="10" fill="#8b5cf6" fill-opacity="0.14" stroke="#8b5cf6" stroke-opacity="0.45"/>
+  <text class="tag" x="188" y="42" text-anchor="middle">ACCESSIBILITY</text>
+  <text class="title" x="132" y="76">Talking Calculator</text>
+  <text class="desc" x="132" y="100">An accessible calculator that</text>
+  <text class="desc" x="132" y="119">reads results aloud.</text>
+  <text class="open" x="418" y="134" text-anchor="end">Open ↗</text>
+</svg>
